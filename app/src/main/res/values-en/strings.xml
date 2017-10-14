@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Portuguese Memes</string>
+    <string name="action_sobre">About Us</string>
+    <string name="exception_error">Internal Error</string>
+    <string name="meme_name">Name</string>
+    <string name="version">Version</string>
+    <string name="app_icon">App Icon</string>
+    <string name="made">Made by Nuno Martins</string>
+</resources>

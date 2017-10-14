@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Memes Tugas</string>
+    <string name="action_sobre">Sobre</string>
+    <string name="meme_name">Nome</string>
+    <string name="exception_error">Erro Interno</string>
+    <string name="version">Versão</string>
+    <string name="app_icon">App Icon</string>
+    <string name="made">Feito por Nuno Martins</string>
+</resources>
