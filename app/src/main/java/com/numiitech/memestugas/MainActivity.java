@@ -80,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
                 new Meme("Porra pá!", R.raw.porra_pa),
                 new Meme("Tu és solteiro ca#!%?!", R.raw.solteiro),
                 new Meme("Acabou o sossego!", R.raw.sossego),
-                new Meme("Vou-te comer (e comi!)", R.raw.vou_comer)
+                new Meme("Vou-te comer (e comi!)", R.raw.vou_comer),
+                new Meme("Windoohhh!", R.raw.windoh),
+                new Meme("Windoohhh! (fã)", R.raw.windoh_fa)
         ));
     }
 
