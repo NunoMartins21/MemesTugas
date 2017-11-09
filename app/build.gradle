@@ -2,6 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
+        config {
+            keyAlias 'NumiitechInc'
+            keyPassword 'numiitech'
+            storeFile file('C:/Users/Nuno Martins/Desktop/Programação/Android/Assinatura/numiitech.jks')
+            storePassword 'numiitech'
+        }
     }
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
@@ -16,11 +22,13 @@ android {
                 cppFlags ""
             }
         }
+        versionCode 2
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     externalNativeBuild {
