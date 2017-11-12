@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.numiitech.memestugas.R;
 import com.numiitech.memestugas.classes.*;
 
@@ -27,6 +28,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Firebase
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     // MediaPlayer
     MediaPlayer mp;
 
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // Components
         final ListView memes = (ListView) findViewById(R.id.memesList);

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "563934138335",
+    "firebase_url": "https://memes-tugas.firebaseio.com",
+    "project_id": "memes-tugas",
+    "storage_bucket": "memes-tugas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563934138335:android:f4b83b9186e23f14",
+        "android_client_info": {
+          "package_name": "com.numiitech.memestugas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563934138335-qottj28da4vlcv76r0k805fudltfg8mf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.numiitech.memestugas",
+            "certificate_hash": "c5f9fc7da3eae2355e2b4a73357cc26ac605ec2f"
+          }
+        },
+        {
+          "client_id": "563934138335-pbbj404pn716cmomj838uurq278ff63q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfXTdoYxItbDlVk367DloSliXLXvg0_iY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563934138335-pbbj404pn716cmomj838uurq278ff63q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
