@@ -15,14 +15,15 @@ android {
         applicationId 'com.numiitech.memestugas'
         minSdkVersion 16
         targetSdkVersion 22
-        versionName '1.2'
+        versionName '1.3'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
                 cppFlags ""
             }
         }
-        versionCode 3
+        versionCode 4
+        versionNameSuffix 'dev'
     }
     buildTypes {
         release {

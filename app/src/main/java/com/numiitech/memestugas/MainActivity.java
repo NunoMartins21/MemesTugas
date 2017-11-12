@@ -54,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
         memes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // Firebase - Bundle
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "meme");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "meme" + Integer.toString(list.indexOf(list.get(i))));
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, list.get(i).getName());
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
                 // Media Player Instance and Settings
                 mp = MediaPlayer.create(getApplicationContext(), list.get(i).getPath());
 
