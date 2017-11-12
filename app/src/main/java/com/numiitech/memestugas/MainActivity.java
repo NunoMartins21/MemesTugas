@@ -2,6 +2,7 @@ package com.numiitech.memestugas;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    // MediaPlayer
+    MediaPlayer mp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +48,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // Media Player Instance and Settings
-                MediaPlayer mp = MediaPlayer.create(getApplicationContext(), list.get(i).getPath());
+                mp = MediaPlayer.create(getApplicationContext(), list.get(i).getPath());
 
                 try {
                     mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
                 }
                 catch (Exception e) {
                     Toast.makeText(getApplicationContext(), R.string.exception_error, Toast.LENGTH_SHORT).show();
@@ -85,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                 new Meme("Windoohhh! (fã)", R.raw.windoh_fa)
         ));
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
