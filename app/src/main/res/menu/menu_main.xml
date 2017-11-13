@@ -6,4 +6,7 @@
         android:id="@+id/action_sobre"
         android:title="@string/action_sobre"
         app:actionLayout="@layout/switch_item" />
+    <item
+        android:id="@+id/action_share"
+        android:title="@string/action_share" />
 </menu>

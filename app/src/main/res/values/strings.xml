@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Memes Tugas</string>
     <string name="action_sobre">Sobre</string>
+    <string name="action_share">Partilhar</string>
+    <string name="sharing">Partilhar via</string>
+    <string name="available_at">Disponível em</string>
     <string name="meme_name">Nome</string>
     <string name="exception_error">Erro Interno</string>
     <string name="version">Versão</string>

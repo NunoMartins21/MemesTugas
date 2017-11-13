@@ -7,4 +7,7 @@
     <string name="version">Versão</string>
     <string name="app_icon">Ícone do App</string>
     <string name="made">Feito por Nuno Martins</string>
+    <string name="action_share">Partilhar</string>
+    <string name="available_at">Disponível em</string>
+    <string name="sharing">Share via</string>
 </resources>

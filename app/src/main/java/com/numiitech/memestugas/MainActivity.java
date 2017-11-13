@@ -1,6 +1,8 @@
 package com.numiitech.memestugas;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
@@ -56,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // Firebase - Bundle
                 Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "meme");
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "meme" + Integer.toString(list.indexOf(list.get(i))));
+                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "Meme");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(list.indexOf(list.get(i))));
                 bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, list.get(i).getName());
                 mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 new Meme("Cheira mal", R.raw.cheira_mal),
                 new Meme("Cocó Enrolado", R.raw.coco_enrolado),
                 new Meme("Droga!", R.raw.droga),
+                new Meme("Epah, cala-te!", R.raw.epah_calate),
                 new Meme("Já tou a falar espanhol...", R.raw.espanhol),
                 new Meme("Espetáculo!", R.raw.espetaculo),
                 new Meme("Fazer uma ganza", R.raw.fazer_ganza),
@@ -124,6 +127,33 @@ public class MainActivity extends AppCompatActivity {
             startActivity(sobre);
             Toast.makeText(getApplicationContext(), getString(R.string.action_sobre), Toast.LENGTH_LONG).show();
             return true;
+        }
+        if (id == R.id.action_share) {
+            // Firebase - Bundle
+            Bundle bundle = new Bundle();
+            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "App");
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
+
+            try {
+                // Get app version
+                PackageInfo pi = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+                String verStr = pi.versionName;
+
+                // Create share intent
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String body = getString(R.string.app_name) + " (" + getString(R.string.version) + " " + verStr + ") - " + getString(R.string.available_at) + " https://goo.gl/pGjZ5n";
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, body);
+                startActivity(Intent.createChooser(sharingIntent, getString(R.string.sharing)));
+            }
+            catch (PackageManager.NameNotFoundException e) {
+                // Create share intent (without version)
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String body = getString(R.string.app_name) + " - " + getString(R.string.available_at) + " https://goo.gl/pGjZ5n";
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, body);
+                startActivity(Intent.createChooser(sharingIntent, getString(R.string.sharing)));
+            }
         }
 
         return super.onOptionsItemSelected(item);
