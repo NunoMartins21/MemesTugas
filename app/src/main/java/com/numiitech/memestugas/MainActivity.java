@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Meme> allMemes() {
         return new ArrayList<>(Arrays.asList(
+                new Meme("Adoro pila", R.raw.adoro_pila),
                 new Meme("Aprendizagem", R.raw.aprendizagem),
                 new Meme("Bocado Rijo", R.raw.bocado_rijo),
                 new Meme("É um cabrão?", R.raw.cabrao),
@@ -104,8 +105,10 @@ public class MainActivity extends AppCompatActivity {
                 new Meme("Tem planos para jantar?", R.raw.planos_jantar),
                 new Meme("Drogados a caçar Pokémons", R.raw.pokemons),
                 new Meme("Porra pá!", R.raw.porra_pa),
-                new Meme("Tu és solteiro ca#!%?!", R.raw.solteiro),
+                new Meme("E vai mas é para o ca#!%?€!", R.raw.pro_caralho),
+                new Meme("Tu és solteiro ca#!%?€!", R.raw.solteiro),
                 new Meme("Acabou o sossego!", R.raw.sossego),
+                new Meme("Grandessíssimas vadias!", R.raw.vadias),
                 new Meme("Vou-te comer (e comi!)", R.raw.vou_comer),
                 new Meme("Windoohhh!", R.raw.windoh),
                 new Meme("Windoohhh! (fã)", R.raw.windoh_fa)
