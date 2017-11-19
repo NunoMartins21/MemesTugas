@@ -1,9 +1,15 @@
 package com.numiitech.memestugas;
 
+import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +28,11 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.numiitech.memestugas.R;
 import com.numiitech.memestugas.classes.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,6 +87,63 @@ public class MainActivity extends AppCompatActivity {
                 catch (Exception e) {
                     Toast.makeText(getApplicationContext(), R.string.exception_error, Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        memes.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                try {
+                    // Instantiate the AlertDialog class
+                    final AlertDialog.Builder shareDialog = new AlertDialog.Builder(MainActivity.this);
+
+                    shareDialog.setTitle(getString(R.string.shareDialog_title) + ": " + list.get(i).getName())
+                            .setItems(new String[]{getString(R.string.shareDialog_share), getString(R.string.shareDialog_exit)}, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int d) {
+                                    switch (d) {
+                                        case 0:
+                                            // Move file to external Storage
+                                            File f = new File(Environment.getExternalStorageDirectory(), getResources().getResourceEntryName(list.get(i).getPath()) + ".mp3");
+
+                                            try {
+                                                InputStream iS = getResources().openRawResource(list.get(i).getPath());
+                                                FileOutputStream fOS = new FileOutputStream(f);
+
+                                                byte[] buffer = new byte[1024];
+                                                int lenght;
+                                                while ((lenght = iS.read(buffer)) > 0) {
+                                                    fOS.write(buffer, 0, lenght);
+                                                }
+
+                                                iS.close();
+                                                fOS.close();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                            // Create share intent
+                                            // TODO - Arranjar maneira de apagar os arquivos de áudio após a sua utilização
+                                            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                                            sharingIntent.setType("audio/*");
+                                            sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                            sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + Environment.getExternalStorageDirectory() + "/" + getResources().getResourceEntryName(list.get(i).getPath()) + ".mp3"));
+                                            startActivity(Intent.createChooser(sharingIntent, getString(R.string.shareDialog_title)));
+                                            break;
+                                        case 1:
+                                            dialog.cancel();
+                                            break;
+                                    }
+                                }
+                            })
+                            .create()
+                            .show();
+                }
+                catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.exception_error), Toast.LENGTH_LONG).show();
+                }
+
+                return false;
             }
         });
     }

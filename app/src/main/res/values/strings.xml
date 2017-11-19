@@ -9,4 +9,9 @@
     <string name="version">Versão</string>
     <string name="app_icon">App Icon</string>
     <string name="made">Feito por Nuno Martins</string>
+
+    <!-- Share stuff -->
+    <string name="shareDialog_title">Partilhar este som</string>
+    <string name="shareDialog_share">Partilhar</string>
+    <string name="shareDialog_exit">Sair</string>
 </resources>
