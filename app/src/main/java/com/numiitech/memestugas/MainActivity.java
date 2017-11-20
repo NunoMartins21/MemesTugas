@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     // MediaPlayer
     MediaPlayer mp;
 
+    // Request Codes
+    static final int SHARE_MEME = 101;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,8 +106,16 @@ public class MainActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int d) {
                                     switch (d) {
                                         case 0:
-                                            // Move file to external Storage
-                                            File f = new File(Environment.getExternalStorageDirectory(), getResources().getResourceEntryName(list.get(i).getPath()) + ".mp3");
+                                            // Create new folder + Move file to external Storage
+                                            File folder = new File(Environment.getExternalStorageDirectory() + "/" + getString(R.string.app_name));
+                                            File f;
+                                            if (!folder.exists()) {
+                                                folder.mkdir();
+                                                f = new File(Environment.getExternalStorageDirectory() + "/" + getString(R.string.app_name), getResources().getResourceEntryName(list.get(i).getPath()) + ".mp3");
+                                            }
+                                            else {
+                                                f = new File(Environment.getExternalStorageDirectory() + "/" + getString(R.string.app_name), getResources().getResourceEntryName(list.get(i).getPath()) + ".mp3");
+                                            }
 
                                             try {
                                                 InputStream iS = getResources().openRawResource(list.get(i).getPath());
@@ -123,12 +134,11 @@ public class MainActivity extends AppCompatActivity {
                                             }
 
                                             // Create share intent
-                                            // TODO - Arranjar maneira de apagar os arquivos de áudio após a sua utilização
                                             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                                            sharingIntent.setType("audio/*");
+                                            sharingIntent.setType("audio/mp3");
                                             sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                            sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + Environment.getExternalStorageDirectory() + "/" + getResources().getResourceEntryName(list.get(i).getPath()) + ".mp3"));
-                                            startActivity(Intent.createChooser(sharingIntent, getString(R.string.shareDialog_title)));
+                                            sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + Environment.getExternalStorageDirectory() + "/" + getString(R.string.app_name) + "/" + getResources().getResourceEntryName(list.get(i).getPath()) + ".mp3"));
+                                            startActivityForResult(Intent.createChooser(sharingIntent, getString(R.string.shareDialog_title)), SHARE_MEME);
                                             break;
                                         case 1:
                                             dialog.cancel();
@@ -234,5 +244,34 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SHARE_MEME) {
+            // Confirmation Message
+            Toast.makeText(getApplicationContext(), getString(R.string.shareDialog_success), Toast.LENGTH_SHORT).show();
+
+            File dir = new File(Environment.getExternalStorageDirectory() + "/" + getString(R.string.app_name));
+
+            // Delete the memes
+            if (dir.exists()) {
+                if (dir.isDirectory())
+                {
+                    String[] children = dir.list();
+                    for (int i = 0; i < children.length; i++)
+                    {
+                        new File(dir, children[i]).delete();
+                    }
+                }
+            }
+            else {
+                Toast.makeText(getApplicationContext(), getString(R.string.directory_notExist), Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            // Error Message
+            Toast.makeText(getApplicationContext(), getString(R.string.exception_error), Toast.LENGTH_SHORT).show();
+        }
     }
 }

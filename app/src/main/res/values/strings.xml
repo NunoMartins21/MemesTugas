@@ -9,9 +9,13 @@
     <string name="version">Versão</string>
     <string name="app_icon">App Icon</string>
     <string name="made">Feito por Nuno Martins</string>
+    <string name="directory_notExist">O diretório não existe</string>
 
     <!-- Share stuff -->
     <string name="shareDialog_title">Partilhar este som</string>
     <string name="shareDialog_share">Partilhar</string>
     <string name="shareDialog_exit">Sair</string>
+    <string name="shareDialog_success">Meme partilhado com sucesso!</string>
+    <string name="shareDialog_cancelled">Partilha cancelada</string>
+    <string name="share_via">via</string>
 </resources>
