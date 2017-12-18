@@ -76,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
                 bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, list.get(i).getName());
                 mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
-                // Media Player Instance and Settings
-                mp = MediaPlayer.create(getApplicationContext(), list.get(i).getPath());
-
                 try {
+                    stopPlaying();
+                    // Media Player Instance and Settings
+                    mp = MediaPlayer.create(getApplicationContext(), list.get(i).getPath());
                     mp.start();
                     mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         public void onCompletion(MediaPlayer mp) {
@@ -156,6 +156,15 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    // To stop playing the meme
+    private void stopPlaying() {
+        if (mp != null) {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
     }
 
     private List<Meme> allMemes() {
