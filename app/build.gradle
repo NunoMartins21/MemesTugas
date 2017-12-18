@@ -22,8 +22,7 @@ android {
                 cppFlags ""
             }
         }
-        versionCode 6
-        versionNameSuffix 'dev'
+        versionCode 7
     }
     buildTypes {
         release {
