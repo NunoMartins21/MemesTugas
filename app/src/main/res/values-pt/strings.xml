@@ -10,4 +10,11 @@
     <string name="action_share">Partilhar</string>
     <string name="available_at">Disponível em</string>
     <string name="sharing">Share via</string>
+    <string name="directory_notExist">O diretório não existe</string>
+    <string name="shareDialog_title">Partilhar este som</string>
+    <string name="shareDialog_share">Partilhar</string>
+    <string name="shareDialog_exit">Sair</string>
+    <string name="shareDialog_success">Meme partilhado com sucesso!</string>
+    <string name="shareDialog_cancelled">Partilha cancelada</string>
+    <string name="share_via">via</string>
 </resources>

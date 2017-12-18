@@ -10,4 +10,11 @@
     <string name="action_share">Share</string>
     <string name="available_at">Available at</string>
     <string name="sharing">Share via</string>
+    <string name="directory_notExist">The directory doesn\'t exist</string>
+    <string name="shareDialog_title">Share this sound</string>
+    <string name="shareDialog_share">Share</string>
+    <string name="shareDialog_exit">Exit</string>
+    <string name="shareDialog_success">Meme shared successfully!</string>
+    <string name="shareDialog_cancelled">Share canceled</string>
+    <string name="share_via">via</string>
 </resources>
