@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     mp.start();
                     mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         public void onCompletion(MediaPlayer mp) {
-                            mp.release();
+                            stopPlaying();
                         }
                     });
                 }
