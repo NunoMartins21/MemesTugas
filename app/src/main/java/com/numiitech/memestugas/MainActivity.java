@@ -40,28 +40,25 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    // App Settings Class
+    App app = new App();
+
     // Firebase
     private FirebaseAnalytics mFirebaseAnalytics;
 
     // MediaPlayer
     MediaPlayer mp;
 
-    // Request Codes
-    static final int SHARE_MEME = 101;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
         // Components
         final ListView memes = (ListView) findViewById(R.id.memesList);
 
         // List Related Stuff
-        final List<Meme> list = allMemes();
+        final List<Meme> list = app.memesList();
         ArrayAdapter<Meme> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
         memes.setAdapter(adapter);
@@ -138,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                                             sharingIntent.setType("audio/mp3");
                                             sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                             sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + Environment.getExternalStorageDirectory() + "/" + getString(R.string.app_name) + "/" + getResources().getResourceEntryName(list.get(i).getPath()) + ".mp3"));
-                                            startActivityForResult(Intent.createChooser(sharingIntent, getString(R.string.shareDialog_title)), SHARE_MEME);
+                                            startActivityForResult(Intent.createChooser(sharingIntent, getString(R.string.shareDialog_title)), app.SHARE_MEME);
                                             break;
                                         case 1:
                                             dialog.cancel();
@@ -165,47 +162,6 @@ public class MainActivity extends AppCompatActivity {
             mp.release();
             mp = null;
         }
-    }
-
-    private List<Meme> allMemes() {
-        return new ArrayList<>(Arrays.asList(
-                new Meme("Adoro pila", R.raw.adoro_pila),
-                new Meme("Aprendizagem", R.raw.aprendizagem),
-                new Meme("Bocado Rijo", R.raw.bocado_rijo),
-                new Meme("É um cabrão?", R.raw.cabrao),
-                new Meme("Uma cagada!", R.raw.cagada),
-                new Meme("Cheira mal", R.raw.cheira_mal),
-                new Meme("Cocó Enrolado", R.raw.coco_enrolado),
-                new Meme("E o dinheiro está no ca#!%?€!", R.raw.dinheiro_caralho),
-                new Meme("Droga!", R.raw.droga),
-                new Meme("Já estou a \"engasgar-se\"", R.raw.engasgar_se),
-                new Meme("Epah, cala-te!", R.raw.epah_calate),
-                new Meme("Já tou a falar espanhol...", R.raw.espanhol),
-                new Meme("Espetáculo!", R.raw.espetaculo),
-                new Meme("Fazer uma ganza", R.raw.fazer_ganza),
-                new Meme("Na feira da Ladra", R.raw.feira_ladra),
-                new Meme("Ganza na areia", R.raw.ganza_areia),
-                new Meme("Que informação dramática...", R.raw.info_dramatica),
-                new Meme("Leave me Alone!", R.raw.leave_alone),
-                new Meme("Maria Leal", R.raw.maria_leal),
-                new Meme("Ando na mecânica e no roubo", R.raw.mecanica_roubo),
-                new Meme("Nem quero comentar", R.raw.nem_comentar),
-                new Meme("Ordenhar uma vaca", R.raw.ordenhar_vaca),
-                new Meme("Passaste!", R.raw.passaste),
-                new Meme("Perdemos? Que se f#&?!", R.raw.perdemos),
-                new Meme("Fo$#-€% a pesca!", R.raw.pesca),
-                new Meme("Tem planos para jantar?", R.raw.planos_jantar),
-                new Meme("Drogados a caçar Pokémons", R.raw.pokemons),
-                new Meme("Porra pá!", R.raw.porra_pa),
-                new Meme("E vai mas é para o ca#!%?€!", R.raw.pro_caralho),
-                new Meme("Tu és solteiro ca#!%?€!", R.raw.solteiro),
-                new Meme("Acabou o sossego!", R.raw.sossego),
-                new Meme("Vaca não sou, p&%# se calhar", R.raw.vaca_puta),
-                new Meme("Grandessíssimas vadias!", R.raw.vadias),
-                new Meme("Vou-te comer (e comi!)", R.raw.vou_comer),
-                new Meme("Windoohhh!", R.raw.windoh),
-                new Meme("Windoohhh! (fã)", R.raw.windoh_fa)
-        ));
     }
 
     @Override
@@ -257,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SHARE_MEME) {
+        if (requestCode == app.SHARE_MEME) {
             // Confirmation Message
             Toast.makeText(getApplicationContext(), getString(R.string.shareDialog_success), Toast.LENGTH_SHORT).show();
 
